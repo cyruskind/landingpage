@@ -36,7 +36,7 @@
         }
 
         .logo-button {
-            background-color: #00ff00;  /* Changed to green */
+            background-color: #00ff00;
             padding: 10px;
             width: 50px;
             height: 50px;
@@ -69,16 +69,16 @@
         }
 
         .projects-previous {
-            border-color: rgba(0, 255, 0, 0.3);  /* Changed to green */
+            border-color: rgba(0, 255, 0, 0.3);
         }
 
         .projects-new {
-            border-color: #00ff00;  /* Changed to green */
+            border-color: #00ff00;
             color: #00ff00;
         }
 
         .subscription {
-            border-color: #00ff00;  /* Changed to green */
+            border-color: #00ff00;
             color: #00ff00;
         }
 
@@ -123,7 +123,7 @@
         .email-input {
             background: transparent;
             border: none;
-            color: #00ff00;  /* Changed to green */
+            color: #00ff00;
             font: inherit;
             height: 40px;
             width: calc(100% - 50px);
@@ -144,7 +144,11 @@
             color: white;
         }
 
-        /* Mobile Specific Styles */
+        .scramble-text {
+            display: inline-block;
+            min-width: 10ch;
+        }
+
         @media (max-width: 500px) {
             body {
                 font-size: 18px;
@@ -195,10 +199,6 @@
                 height: 50px;
             }
 
-            a {
-                padding: 8px 0;
-            }
-
             .email-form button {
                 padding: 8px 15px;
             }
@@ -232,19 +232,19 @@
             <div class="row">
                 <div class="left">#<br>1</div>
                 <div class="right">
-                    <a href="#">Personal Portfolio</a>
+                    <a href="#" class="scramble-text" data-text="Personal Portfolio">Personal Portfolio</a>
                 </div>
             </div>
             <div class="row">
                 <div class="left">#<br>2</div>
                 <div class="right">
-                    <a href="#">Subject Matter Expertise</a>
+                    <a href="#" class="scramble-text" data-text="Web Development">Subject Matter Expertise</a>
                 </div>
             </div>
             <div class="row">
                 <div class="left">#<br>3</div>
                 <div class="right">
-                    <a href="#">Digital Art</a>
+                    <a href="#" class="scramble-text" data-text="Digital Art">Current Thoughts</a>
                 </div>
             </div>
         </section>
@@ -253,7 +253,7 @@
             <div class="row">
                 <div class="left">#<br>4</div>
                 <div class="right">
-                    <a href="#">Latest Project↗</a>
+                    <a href="#" class="scramble-text" data-text="Latest Project↗">Latest Project↗</a>
                 </div>
             </div>
         </section>
@@ -263,7 +263,7 @@
                 <div class="left">>><br>>></div>
                 <div class="right">
                     <form class="email-form">
-                        <label for="email">Contact me:</label>
+                        <label for="email">Contact Me:</label>
                         <input type="email" id="email" class="email-input" placeholder="YOUR@EMAIL.COM">
                         <button type="submit">→</button>
                     </form>
@@ -273,5 +273,54 @@
     </main>
 
     <a href="#" class="mobile-shop">Projects↗</a>
+
+    <script>
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&';
+        const scrambleTexts = document.querySelectorAll('.scramble-text');
+        
+        function scrambleText(element) {
+            const originalText = element.dataset.text;
+            let iterations = 0;
+            const maxIterations = 15;
+            
+            const interval = setInterval(() => {
+                element.innerText = originalText
+                    .split('')
+                    .map((letter, index) => {
+                        if (iterations >= maxIterations - (index * 2)) {
+                            return letter;
+                        }
+                        return characters[Math.floor(Math.random() * characters.length)];
+                    })
+                    .join('');
+                
+                iterations++;
+                
+                if (iterations >= maxIterations + originalText.length) {
+                    clearInterval(interval);
+                }
+            }, 50);
+        }
+
+        // Initial scramble on page load
+        scrambleTexts.forEach(text => scrambleText(text));
+
+        // Scramble on hover
+        scrambleTexts.forEach(text => {
+            text.addEventListener('mouseenter', () => {
+                scrambleText(text);
+            });
+
+            text.addEventListener('touchstart', () => {
+                scrambleText(text);
+            });
+        });
+
+        // Random scramble every few seconds
+        setInterval(() => {
+            const randomText = scrambleTexts[Math.floor(Math.random() * scrambleTexts.length)];
+            scrambleText(randomText);
+        }, 3000);
+    </script>
 </body>
 </html>
