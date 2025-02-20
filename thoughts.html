@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Current Thoughts</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: black;
+            color: #84898E;
+            font-family: monospace, Arial, sans-serif;
+            text-transform: uppercase;
+            line-height: 1.5;
+            font-size: 16px;
+        }
+
+        header {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .back-link {
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo-button {
+            background-color: #00ff00;
+            padding: 10px;
+            width: 50px;
+            height: 50px;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-family: monospace;
+            font-weight: bold;
+            font-size: 20px;
+            color: black;
+        }
+
+        .logo-button:hover {
+            background-color: transparent;
+            color: #00ff00;
+        }
+
+        main {
+            max-width: 100%;
+            padding: 60px 15px 60px;
+            width: 100%;
+        }
+
+        .thoughts-section {
+            border-left: 3px solid rgba(0, 255, 0, 0.3);
+            padding: 0 15px 20px;
+            margin-bottom: 20px;
+        }
+
+        .thought-entry {
+            margin-bottom: 40px;
+            border-bottom: 1px solid rgba(0, 255, 0, 0.1);
+            padding-bottom: 30px;
+        }
+
+        .thought-entry:last-child {
+            border-bottom: none;
+        }
+
+        .thought-title {
+            color: #00ff00;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .thought-content {
+            color: #84898E;
+            margin-bottom: 15px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .thought-date {
+            color: #84898E;
+            font-size: 12px;
+            opacity: 0.7;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 15px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 15px;
+            color: #84898E;
+            font-size: 14px;
+            z-index: 10;
+        }
+
+        .footer-left {
+            color: #00ff00;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .footer-right {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer a {
+            color: #84898E;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: #00ff00;
+        }
+
+        /* Add these styles to your existing CSS */
+        .add-thought-button {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background: #00ff00;
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-family: monospace;
+            text-transform: uppercase;
+            z-index: 100;
+        }
+
+        .add-thought-button:hover {
+            background: transparent;
+            color: #00ff00;
+        }
+
+        .submission-form {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: black;
+            border: 1px solid #00ff00;
+            padding: 20px;
+            width: 90%;
+            max-width: 500px;
+            z-index: 1000;
+        }
+
+        .submission-form.active {
+            display: block;
+        }
+
+        .form-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 999;
+        }
+
+        .form-overlay.active {
+            display: block;
+        }
+
+        .submission-form input,
+        .submission-form textarea {
+            width: 100%;
+            background: transparent;
+            border: 1px solid #84898E;
+            color: #00ff00;
+            padding: 10px;
+            margin-bottom: 15px;
+            font-family: monospace;
+            text-transform: uppercase;
+        }
+
+        .submission-form textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        .form-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        .form-buttons button {
+            background: #00ff00;
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-family: monospace;
+        }
+
+        .form-buttons button:hover {
+            background: transparent;
+            color: #00ff00;
+        }
+
+        .close-button {
+            background: transparent;
+            color: #84898E;
+        }
+
+        .close-button:hover {
+            color: #00ff00;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="back-link">← Back</a>
+        <button class="logo-button">CY</button>
+    </header>
+
+    <main>
+        <section class="thoughts-section">
+            <div class="thought-entry">
+                <div class="thought-title">ON ARTIFICIAL INTELLIGENCE</div>
+                <div class="thought-content">
+                    EXPLORING THE INTERSECTION OF HUMAN CREATIVITY AND MACHINE LEARNING. 
+                    THE FUTURE OF DESIGN LIES NOT IN REPLACEMENT, BUT IN AUGMENTATION 
+                    AND COLLABORATION BETWEEN HUMAN INTUITION AND COMPUTATIONAL POWER.
+                </div>
+                <div class="thought-date">20 FEB 2025 14:30</div>
+            </div>
+
+            <div class="thought-entry">
+                <div class="thought-title">DIGITAL MINIMALISM</div>
+                <div class="thought-content">
+                    STRIPPING AWAY THE UNNECESSARY TO FOCUS ON WHAT TRULY MATTERS. 
+                    IN A WORLD OF ENDLESS NOTIFICATIONS AND INFINITE SCROLLING, 
+                    FINDING CLARITY THROUGH INTENTIONAL DIGITAL SPACES.
+                </div>
+                <div class="thought-date">19 FEB 2025 09:15</div>
+            </div>
+
+            <div class="thought-entry">
+                <div class="thought-title">THE FUTURE OF WEB DESIGN</div>
+                <div class="thought-content">
+                    BREAKING FREE FROM TEMPLATE THINKING. EMBRACING UNIQUE DIGITAL 
+                    EXPERIENCES THAT CHALLENGE CONVENTIONS WHILE MAINTAINING 
+                    USABILITY AND PURPOSE.
+                </div>
+                <div class="thought-date">18 FEB 2025 16:45</div>
+            </div>
+        </section>
+    </main>
+
+    <div class="footer">
+        <div class="footer-left">
+            <div id="clock"></div>
+            <div id="location" class="location"></div>
+        </div>
+        <div class="footer-right">
+            <a href="/privacy">PP</a>
+            <a href="/terms">Terms</a>
+        </div>
+    </div>
+
+    <script>
+        // Clock functionality
+        function updateClock() {
+            const now = new Date();
+            let hours = now.getHours().toString().padStart(2, '0');
+            let minutes = now.getMinutes().toString().padStart(2, '0');
+            let seconds = now.getSeconds().toString().padStart(2, '0');
+            const timeString = `${hours}:${minutes}:${seconds}`;
+            document.getElementById('clock').textContent = timeString;
+        }
+
+        // Get timezone location
+        function getTimezoneLocation() {
+            try {
+                const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                const city = timeZone.split('/').pop().replace(/_/g, ' ').toUpperCase();
+                document.getElementById('location').textContent = city;
+            } catch (error) {
+                console.error('Error getting timezone:', error);
+                document.getElementById('location').textContent = '';
+            }
+        }
+
+        // Initialize clock and location
+        getTimezoneLocation();
+        updateClock();
+        setInterval(updateClock, 1000);
+    </script>
+</body>
+</html>
