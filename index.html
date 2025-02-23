@@ -386,7 +386,7 @@
                 <div class="left">>><br>>></div>
                 <div class="right">
                     <form class="email-form">
-                        <label for="email">Enter E-mail:</label>
+                        <label for="email">Enter e-mail:</label>
                         <input type="email" name="entry.760550934" id="email" class="email-input" placeholder="YOUR@EMAIL.COM" required>
                         <button type="submit">→</button>
                     </form>
@@ -468,14 +468,30 @@
                 formData.append('entry.760550934', email);
                 
                 // First try - direct POST
-                await fetch('https://docs.google.com/forms/d/e/1f5_tSkdjIbWo-P7gIZKSW4lBp9hMVPvWmLcZ7E17Yx4/formResponse', {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: new URLSearchParams(formData)
-                });
+                // First try - direct POST with iframe
+                const form = document.createElement('form');
+                form.setAttribute('method', 'POST');
+                form.setAttribute('action', 'https://docs.google.com/forms/d/e/1f5_tSkdjIbWo-P7gIZKSW4lBp9hMVPvWmLcZ7E17Yx4/formResponse');
+                form.setAttribute('target', 'hidden_iframe');
+                
+                const emailInput = document.createElement('input');
+                emailInput.setAttribute('name', 'entry.760550934');
+                emailInput.setAttribute('value', email);
+                form.appendChild(emailInput);
+                
+                const iframe = document.createElement('iframe');
+                iframe.setAttribute('name', 'hidden_iframe');
+                iframe.style.display = 'none';
+                document.body.appendChild(iframe);
+                document.body.appendChild(form);
+                
+                form.submit();
+                
+                // Cleanup
+                setTimeout(() => {
+                    document.body.removeChild(form);
+                    document.body.removeChild(iframe);
+                }, 500);
 
                 // Clear the input and show success
                 document.getElementById('email').value = '';
